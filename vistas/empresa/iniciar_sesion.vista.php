@@ -6,7 +6,7 @@
     <title>Empresa</title>
 </head>
 <body>
-    <h1>Vista principal de la empresa</h1>
-    <a href="?c=Empresa&a=iniciarSesion">Iniciar sesion</a>
+    <h1>Formulario Iniciar Sesion</h1>
+    <a href="?">Cancelar</a>
 </body>
 </html>
