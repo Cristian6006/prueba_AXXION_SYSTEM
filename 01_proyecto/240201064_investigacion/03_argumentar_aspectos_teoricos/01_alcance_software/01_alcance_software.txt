@@ -1,0 +1,13 @@
+Alcance (software): 
+-- Arquitectura de software,
+   -- Estilos arquitectónicos
+   -- Patrones arquitectónicos    
+-- Lenguajes,
+   -- DataBase
+   -- Backend
+      -- Patrones de diseño,
+   -- Frontend
+-- FrameWorks,
+   -- Dependencias,
+   -- librerías, 
+-- etc.
