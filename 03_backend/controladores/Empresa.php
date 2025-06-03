@@ -2,7 +2,7 @@
     
     class Empresa {
         
-        public function _main(){
+        public function main(){
         require_once ("vistas/empresa/index.vista.php");
     } 
     public function iniciarSesion(){

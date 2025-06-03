@@ -2,7 +2,7 @@
 if (!isset($_REQUEST['c'])){
     require_once "controladores/Empresa.php";
     $controlador = new Empresa;
-    $controlador->_main();
+    $controlador->main();
 } else {
     $controlador = $_REQUEST["c"];
     require_once "controladores/" . $controlador . ".php";
