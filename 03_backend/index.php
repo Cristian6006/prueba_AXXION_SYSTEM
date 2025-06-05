@@ -1,8 +1,10 @@
 <?php
+require_once "modelos/DataBase.php";
+$pruba_conexion = DataBase::connection();
 if (!isset($_REQUEST['c'])){
-    require_once "controladores/Empresa.php";
-    $controlador = new Empresa;
-    $controlador->main();
+    require_once "controladores/Usuarios.php";
+    $controlador = new Usuarios();
+    $controlador->rolConsultar();
 } else {
     $controlador = $_REQUEST["c"];
     require_once "controladores/" . $controlador . ".php";
