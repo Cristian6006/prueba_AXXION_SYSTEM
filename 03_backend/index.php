@@ -4,7 +4,7 @@ $pruba_conexion = DataBase::connection();
 if (!isset($_REQUEST['c'])){
     require_once "controladores/Usuarios.php";
     $controlador = new Usuarios();
-    $controlador->rolConsultar();
+    $controlador->usuarioRegistrar();
 } else {
     $controlador = $_REQUEST["c"];
     require_once "controladores/" . $controlador . ".php";

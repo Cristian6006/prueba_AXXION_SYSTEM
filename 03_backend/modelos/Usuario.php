@@ -250,6 +250,47 @@
                 die($e->getMessage());
             }
         }
+
+                # CU04 - Consultar Roles
+        public function readUsuario(){
+            try {
+                $userList = [];
+                $sql = 'SELECT * FROM USUARIOS';
+                $stmt = $this->dbh->query($sql);
+                foreach ($stmt->fetchAll() as $usuario) {
+                    $userObj = new Usuario;
+                    $userObj->setUsuarioCodigo($usuario['usuario_codigo']);
+                    $userObj->setUsuarioNombres($usuario['usuario_nombres']);
+                    $userObj->setUsuarioApellidos($usuario['usuario_apellidos']);
+                    $userObj->setUsuarioIdentificacion($usuario['usuario_identificador']);
+                    $userObj->setUsuarioEmail($usuario['usuario_email']);
+                    $userObj->setUsuarioEstado($usuario['usuario_estado']);
+                    array_push($userList, $userObj);
+                }
+                return $userList;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+            
+        }
+                # CU03 - Registrar Rol
+        public function registrarUsuario(){
+            try {
+                $sql = 'INSERT INTO USUARIOS VALUES (:rolCodigo, :usuarioCodigo, :usuarioNombres, :usuarioApellidos, :usuarioIdentificacion, :usuarioEmail, :usuarioPass, :usuarioEstado)';
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue('rolCodigo', $this->getRolCodigo());
+                $stmt->bindValue('usuarioCodigo', $this->getUsuarioCodigo());
+                $stmt->bindValue('usuarioNombres', $this->getUsuarioNombres());
+                $stmt->bindValue('usuarioApellidos', $this->getUsuarioApellidos());
+                $stmt->bindValue('usuarioIdentificacion', $this->getUsuarioIdentificacion());
+                $stmt->bindValue('usuarioEmail', $this->getUsuarioEmail());
+                $stmt->bindValue('usuarioPass', $this->getUsuarioPass());
+                $stmt->bindValue('usuarioEstado', $this->getUsuarioEstado());
+                $stmt->execute();
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
     }
     
 ?>
