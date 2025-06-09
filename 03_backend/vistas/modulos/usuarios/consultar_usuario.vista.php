@@ -7,14 +7,18 @@
 </head>
 <body>
     <h1>Consultar Usuarios</h1>
+    <a href="?c=Usuarios&a=usuarioRegistrar">Registrar usuario</a>
+    <br><br>
     <table border="1">
         <thead>
             <tr>
-                <th>Código</th>
+                <th>Código de rol</th>
+                <th>Código de usuario</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Id</th>
                 <th>Correo</th>
+                <th>Contrseña</th>
                 <th>Estado</th>
                 <th>Acciones</th>
             </tr>
@@ -22,19 +26,20 @@
         <tbody>
             <?php foreach ($usuarios as $usuario): ?>
                 <tr class="text-center">
+                    <td><?php echo $usuario->getRolCodigo(); ?></td>
                     <td><?php echo $usuario->getUsuarioCodigo(); ?></td>
                     <td><?php echo $usuario->getUsuarioNombres(); ?></td>
                     <td><?php echo $usuario->getUsuarioApellidos(); ?></td>
                     <td><?php echo $usuario->getUsuarioIdentificacion(); ?></td>
                     <td><?php echo $usuario->getUsuarioEmail(); ?></td>
+                    <td><?php echo $usuario->getUsuarioPass(); ?></td>
                     <td><?php echo $usuario->getUsuarioEstado(); ?></td>
                     <td>
-                        <a href="?c=Usuario&a=rolActualizae&idRol" <?php echo $usuario->getRolCodigo(); ?>>Actualizar</a>
-                        <a href="?c=Usuario&a=rolEliminar&idRol" <?php echo $usuario->getrolCodigo(); ?>>Eliminar</a> 
+                        <a href="?c=Usuarios&a=usuarioActualizar&idUser=<?php echo $usuario->getUsuarioCodigo(); ?>">Actualizar</a>
+                        <a href="?c=Usuarios&a=usuarioEliminar&idUser=<?php echo $usuario->getUsuarioCodigo(); ?>">Eliminar</a> 
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
-        <a href="vistas/modulos/usuarios/registrar_usuario.vista.php">Registrar usuario</a>
 </body>
 </html>

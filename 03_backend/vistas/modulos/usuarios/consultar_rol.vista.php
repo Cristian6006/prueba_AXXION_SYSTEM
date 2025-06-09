@@ -7,6 +7,8 @@
 </head>
 <body>
     <h1>Consultar Roles</h1>
+    <a href="?c=Usuarios&a=rolRegistrar">Registrar rol</a>
+    <br><br>
     <table border="1">
         <thead>
             <tr>
@@ -21,8 +23,8 @@
                     <td><?php echo $rol->getRolCodigo(); ?></td>
                     <td><?php echo $rol->getRolNombre(); ?></td>
                     <td>
-                        <a href="?c=Usuario&a=rolActualizae&idRol" <?php echo $rol->getRolCodigo(); ?>>Actualizar</a>
-                        <a href="?c=Usuario&a=rolEliminar&idRol" <?php echo $rol->getrolCodigo(); ?>>Eliminar</a> 
+                        <a href="?c=Usuarios&a=rolActualizar&idRol=<?php echo $rol->getRolCodigo(); ?>">Actualizar</a>
+                        <a href="?c=Usuarios&a=rolEliminar&idRol=<?php echo $rol->getrolCodigo(); ?>">Eliminar</a> 
                     </td>
                 </tr>
             <?php endforeach; ?>

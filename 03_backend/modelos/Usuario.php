@@ -240,11 +240,11 @@
         }
 
         # CU06 - Eliminar Rol
-        public function eliminarRol($rolCode){
+        public function eliminarRol($rolCodigo){
             try {
                 $sql = 'DELETE FROM ROLES WHERE rol_codigo = :rolCodigo';
                 $stmt = $this->dbh->prepare($sql);
-                $stmt->bindValue('rolCodigo', $rolCode);
+                $stmt->bindValue('rolCodigo', $rolCodigo);
                 $stmt->execute();
             } catch (Exception $e) {
                 die($e->getMessage());
@@ -259,11 +259,13 @@
                 $stmt = $this->dbh->query($sql);
                 foreach ($stmt->fetchAll() as $usuario) {
                     $userObj = new Usuario;
+                    $userObj->setRolCodigo($usuario['rol_codigo']);
                     $userObj->setUsuarioCodigo($usuario['usuario_codigo']);
                     $userObj->setUsuarioNombres($usuario['usuario_nombres']);
                     $userObj->setUsuarioApellidos($usuario['usuario_apellidos']);
                     $userObj->setUsuarioIdentificacion($usuario['usuario_identificador']);
                     $userObj->setUsuarioEmail($usuario['usuario_email']);
+                    $userObj->setUsuarioPass($usuario['usuario_pass']);
                     $userObj->setUsuarioEstado($usuario['usuario_estado']);
                     array_push($userList, $userObj);
                 }
@@ -286,6 +288,70 @@
                 $stmt->bindValue('usuarioEmail', $this->getUsuarioEmail());
                 $stmt->bindValue('usuarioPass', $this->getUsuarioPass());
                 $stmt->bindValue('usuarioEstado', $this->getUsuarioEstado());
+                $stmt->execute();
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+
+
+                public function getUsuarioById($usuarioCode) {
+            try {
+                $sql = "SELECT * FROM USUARIOS WHERE usuario_codigo=:usuarioCodigo";
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue('usuarioCodigo', $usuarioCode);
+                $stmt->execute();
+                $userDb = $stmt->fetch();
+                $usuario = new Usuario;
+                $usuario->setRolCodigo($userDb['rol_codigo']);
+                $usuario->setUsuarioCodigo($userDb['usuario_codigo']);
+                $usuario->setusuarioNombres($userDb['usuario_nombres']);
+                $usuario->setUsuarioApellidos($userDb['usuario_apellidos']);
+                $usuario->setUsuarioIdentificacion($userDb['usuario_identificador']);
+                $usuario->setUsuarioEmail($userDb['usuario_email']);
+                $usuario->setusuarioPass($userDb['usuario_pass']);
+                $usuario->setUsuarioEstado($userDb['usuario_estado']);
+                return $usuario;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+
+                public function actualizarUsuario(){
+            try {
+                $sql = 'UPDATE USUARIOS SET
+                                rol_codigo = :rolCodigo,
+                                usuario_codigo = :usuarioCodigo,
+                                usuario_nombres = :usuarioNombres,
+                                usuario_apellidos = :usuarioApellidos,
+                                usuario_identificador = :usuarioIdentificacion,
+                                usuario_email = :usuarioEmail,
+                                usuario_pass = :usuarioPass,
+                                usuario_Estado = :usuarioEstado
+                            WHERE usuario_codigo = :usuarioCodigo';
+                            
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue('rolCodigo', $this->getrolCodigo());
+                $stmt->bindValue('usuarioCodigo', $this->getusuarioCodigo());
+                $stmt->bindValue('usuarioNombres', $this->getUsuarioNombres());
+                $stmt->bindValue('usuarioApellidos', $this->getusuarioApellidos());
+                $stmt->bindValue('usuarioIdentificacion', $this->getusuarioIdentificacion());
+                $stmt->bindValue('usuarioEmail', $this->getusuarioEmail());
+                $stmt->bindValue('usuarioPass', $this->getUsuarioPass());
+                $stmt->bindValue('usuarioEstado', $this->getusuarioEstado());
+                $stmt->execute();
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+
+
+
+                public function eliminarUsuario($usuarioCodigo){
+            try {
+                $sql = 'DELETE FROM USUARIOS WHERE usuario_codigo = :usuarioCodigo';
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue('usuarioCodigo', $usuarioCodigo);
                 $stmt->execute();
             } catch (Exception $e) {
                 die($e->getMessage());
