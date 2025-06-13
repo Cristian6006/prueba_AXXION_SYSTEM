@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    width: 100vw;
+    overflow-x: hidden; 
+}
+.contenedor {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;    
+    font-size: 1vw;
+}
+.borde {
+border: 1px solid black;
+
+}
+header {
+    width: 100%;
+    height: 4vw;
+    display: flex;
+}
+.logo {
+    width: 20%;
+}
+.principal {
+    width: 60%;
+}
+.nave {
+    width: 80%;
+    height: 3vw;
+    float: right;
+}
+.perfil {
+    width: 20%;
+    height: 6vw;
+    float: left;
+}

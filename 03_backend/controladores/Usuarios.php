@@ -1,32 +1,32 @@
 <?php 
     require_once "modelos/Usuario.php";
     class Usuarios {
-        public function main(){
-            if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-            require_once ("vistas/roles/admin/admin.vista.php");
-            } 
+    public function main(){        
+        if (!empty($_SESSION['sesion'])) {
+            header("Location: ?c=PanelControl");
+        } else {
+            header("Location: ?");
         }
+    }
 
-        public function rolRegistrar(){
-            // Verifica si el método de solicitud es GET
-            if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+    public function rolRegistrar(){        
+        if ($this->sesion == 'admin') {            
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 require_once "vistas/modulos/usuarios/registrar_rol.vista.php";
-            } 
-
-            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            }
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $rol = new Usuario;
                 $rol->setRolCodigo(null);
-                $rol->setrolNombre($_POST['rol_nombre']);
-                $rol->registrarRol(); 
-                header("Location:?c=Usuarios&a=rolConsultar");
-                /* $rol = $rol->login(); */
-                /* if ($rol) {
-                    header("Location:?c=PanelControl");
-                } else {
-                    header("Location:?");
-                } */
+                $rol->setRolNombre($_POST['rol_nombre']);
+                $rol->registrarRol();
+                header("Location: ?c=Usuarios&a=rolConsultar");
             }
-            }
+        } else {
+            header("Location: ?c=PanelControl");
+        }        
+    }
+
+    
             public function rolConsultar(){
                 $roles = new Usuario;
                 $roles = $roles->readRoles();

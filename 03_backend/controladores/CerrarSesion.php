@@ -1,7 +1,8 @@
 <?php 
     class CerrarSesion {
         public function main(){
-            header("Location:?");
+            session_destroy();
+            header("Location: ?");
         } 
     }
 
